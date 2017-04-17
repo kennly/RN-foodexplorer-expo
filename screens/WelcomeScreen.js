@@ -3,16 +3,16 @@ import { View, Text, AsyncStorage } from 'react-native';
 import Slides from '../components/Slides';
 import { AppLoading } from 'expo';
 import _ from 'lodash'
+import firebase from 'firebase';
 
 const SLIDE_DATA = [
-  {text: 'Welcome to JobApp', color: '#03A9F4'},
+  {text: 'Welcome to this demo App', color: '#03A9F4'},
   {text: 'This is screen two', color: '#A6E7B3'},
-  {text: 'Set your location, then swipe away', color: '#DFE9E2'}
+  {text: 'This is screen three', color: '#DFE9E2'}
 ];
 
-
 class WelcomeScreen extends Component {
-  state = { token: null }
+  state = { token: null, loggedIn: false }
 
   constructor(props){
     super(props)
@@ -20,15 +20,16 @@ class WelcomeScreen extends Component {
   }
 
   async componentWillMount() {
-    let token = await AsyncStorage.getItem('fb_token');
-    AsyncStorage.removeItem('fb_token')
-    if (token){
-      this.props.navigation.navigate('map');
-      this.setState({ token })
-    }else {
-      this.setState({ token: false });
-    }
-
+    await firebase.auth().onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        this.setState({ loggedIn: true})
+        this.props.navigation.navigate('map');
+      }else {
+        this.setState({ loggedIn: false})
+      }
+      console.log(this.state);
+    });
   }
 
   onSlidesComplete(){
@@ -36,9 +37,6 @@ class WelcomeScreen extends Component {
   }
 
   render() {
-    if (_.isNull(this.state.token)){
-      return <AppLoading />
-    }
     return (
         <Slides
           data={SLIDE_DATA}

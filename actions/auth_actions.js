@@ -17,10 +17,9 @@ const config = {
 };
 firebase.initializeApp(config);
 
-  //AsyncStorage store small pieces of data in phone.
-  //AsyncStorage.setItem('fb_token', token);
-  //AsyncStorage.getItem('fb_token');
-
+//AsyncStorage store small pieces of data in phone.
+//AsyncStorage.setItem('fb_token', token);
+//AsyncStorage.getItem('fb_token');
 //es6 reafactor-> removed outer {} in facebookLogin
 export const facebookLogin = () =>
   async (dispatch) => {
@@ -31,10 +30,8 @@ export const facebookLogin = () =>
     } else {
       // start fb login process.
       doFacebookLogin(dispatch);
-      firebaseSave(token)
     }
   }
-
 
 const doFacebookLogin = async (dispatch) => {
   let { type, token } = await Facebook.logInWithReadPermissionsAsync('1885915525026805', {
@@ -46,7 +43,7 @@ const doFacebookLogin = async (dispatch) => {
     return dispatch({ type: FACEBOOK_LOGIN_FAIL });
   }
 
-  firebaseSave(token)
+  await firebaseSave(token)
 
   await dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
 
