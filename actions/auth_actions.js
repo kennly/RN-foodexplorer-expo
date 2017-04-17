@@ -10,7 +10,8 @@ import {
   //AsyncStorage.setItem('fb_token', token);
   //AsyncStorage.getItem('fb_token');
 
-export const facebookLogin = () => {
+//es6 reafactor-> removed outer {} in facebookLogin
+export const facebookLogin = () =>
   async (dispatch) => {
     let token = await AsyncStorage.getItem('fb_token');
     if (token) {
@@ -21,10 +22,11 @@ export const facebookLogin = () => {
       doFacebookLogin(dispatch);
     }
   }
-};
+
+
 
 const doFacebookLogin = async (dispatch) => {
-  let { type, token } = await Facebook.logInWithReadPermissionAysnc('1885915525026805', {
+  let { type, token } = await Facebook.logInWithReadPermissionsAsync('1885915525026805', {
     permissions: ['public_profile']
   });
 
