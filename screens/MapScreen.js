@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { MapView } from 'expo';
 
 class MapScreen extends Component {
+  // state = {
+  //   region: {
+  //     logitude: -122,
+  //     latitude: 37,
+  //     longitudeDelta: 0.04,
+  //     latitudeDelta: 0.09
+  //   }
+  // }
+
   render() {
     return (
-      <View>
-        <Text> MapScreen</Text>
-        <Text> MapScreen</Text>
-        <Text> MapScreen</Text>
-        <Text> MapScreen</Text>
+      <View style={{ flex: 1}}>
+        <MapView
+          style={{ flex: 1}}
+        />
       </View>
     )
   }
