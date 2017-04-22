@@ -2,7 +2,7 @@
   "name": "foodexplorer-expo",
   "version": "0.0.0",
   "description": "Hello Expo!",
-  "author": null,
+  "author": "",
   "private": true,
   "main": "main.js",
   "dependencies": {
