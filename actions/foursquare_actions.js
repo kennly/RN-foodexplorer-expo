@@ -22,7 +22,7 @@ const RESTAURANT_ROOT_URL = 'https://api.foursquare.com/v2/venues/search?';
 const RESTAURANT_QUERY_PARAMS = {
   client_id: 'BERZG4GIUCLIPJT4OQQMVWFNWWK0LTL20RVXCKWVABALUDUZ',
   client_secret: 'CNBVJZ4JHNE1MFL2TSEGK3ZATWQRKFAFIIZJZTCY3WMA0LHX',
-  ll: '40.7,-74'
+  ll: '40.7,-74',
   v: '20170303',
   m:'foursquare',
   query: 'sushi'
@@ -36,6 +36,7 @@ const buildRestaurantUrl = (combineLatLng) => {
 
 export const fetchRestaurant = (region) => {
   //use redux thunk for network request.
+  console.log('region in action',region)
   return async function(dispatch) {
     let region = await region
     console.log('region here', region)
