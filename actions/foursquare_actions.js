@@ -28,21 +28,25 @@ const RESTAURANT_QUERY_PARAMS = {
   query: 'sushi'
 };
 
-const buildRestaurantUrl = (combineLatLng) => {
-  const query = qs.stringify({ ...RESTAURANT_QUERY_PARAMS, ll: combineLatLng })
+const buildRestaurantUrl = (region) => {
+  const query = qs.stringify({ ...RESTAURANT_QUERY_PARAMS, ll: region })
   return `${RESTAURANT_ROOT_URL}${query}`;
 
 }
 
-export const fetchRestaurant = (region) => {
+export const fetchRestaurant = (region) => async (dispatch) => {
   //use redux thunk for network request.
-  console.log('region in action',region)
-  return async function(dispatch) {
+  try{
+    console.log('region in action',region)
     let region = await region
     console.log('region here', region)
     const url = buildRestaurantUrl(region);
+    console.log(url);
     let { data } = await axios.get(url);
     dispatch({ type: FETCH_RESTAURANT, payload: data });
     console.log('data from dispatch', data);
+  } catch(e) {
+    console.error(e);
   }
+
 };

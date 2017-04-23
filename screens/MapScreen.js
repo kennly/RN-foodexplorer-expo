@@ -26,8 +26,9 @@ class MapScreen extends Component {
   }
 
   onButtonPress = () => {
-    console.log('state region', this.state.region)
+    console.log('props',this.props)
     this.props.fetchRestaurant(this.state.region);
+    console.log('state region', this.state.region)
   }
 
   render() {
